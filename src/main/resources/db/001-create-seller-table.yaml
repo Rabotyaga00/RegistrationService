@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Rabotyaga
+      changes:
+        - createTable:
+            tableName: sellers
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: shop_name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                 name: created_at
+                 type: Timestamp
+                 constraints:
+                   nullable: false

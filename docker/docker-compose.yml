@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: dco-postgres
+    environment:
+      POSTGRES_USER: dco_user
+      POSTGRES_PASSWORD: dco_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+    networks:
+      - dco-network
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U dco_user" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  kotlin-seller-service:
+    build: ./seller-service
+    container_name: seller-service
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/seller_db
+      SPRING_DATASOURCE_USERNAME: dco_user
+      SPRING_DATASOURCE_PASSWORD: dco_password
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - dco-network
+
+volumes:
+  postgres_data:
+
+networks:
+  dco-network:
+    driver: bridge
