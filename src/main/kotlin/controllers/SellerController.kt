@@ -4,7 +4,6 @@ import org.example.dto.SellerDTO
 import org.example.dto.SellerResponseDTO
 import org.example.dto.UpdateSellerRequest
 import org.example.domain.Seller
-import org.example.repository.SellerRepository
 import org.example.services.SellerService
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -15,8 +14,8 @@ class SellerController (
     private val sellerService : SellerService
 ){
     @PostMapping
-    fun createSeller(userId: UUID, name: String): SellerResponseDTO {
-        val saved = sellerService.registerSeller(userId, name)
+    fun createSeller(@RequestBody request: UpdateSellerRequest): SellerResponseDTO {
+        val saved = sellerService.registerSeller(request.userId, request.name)
         return SellerResponseDTO(saved.userId,saved.shopName)
     }
     @GetMapping("/{id}")

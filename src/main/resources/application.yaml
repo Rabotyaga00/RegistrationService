@@ -1,13 +1,21 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/seller_db
+    url: jdbc:postgresql://postgres:5432/seller_db
     username: dco_user
     password: dco_password
     driver-class-name: org.postgresql.Driver
 
+    hikari:
+      initialization-fail-timeout: 60000
+
+    logging:
+      level:
+        org.hibernate: DEBUG
+        org.springframework.jdbc: DEBUG
+
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:
@@ -18,4 +26,4 @@ spring:
       port: 9090
 
   liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.yaml
+    enabled: false
