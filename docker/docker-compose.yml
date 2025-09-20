@@ -7,11 +7,12 @@ services:
     environment:
       POSTGRES_USER: dco_user
       POSTGRES_PASSWORD: dco_password
+      POSTGRES_DB: seller_db
     ports:
       - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+#      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     networks:
       - dco-network
     healthcheck:
@@ -21,8 +22,12 @@ services:
       retries: 5
 
   kotlin-seller-service:
-    build: ./seller-service
+    image: eclipse-temurin:17-jdk # JDK 17, чтобы запускать jar
     container_name: seller-service
+    working_dir: /app
+    volumes:
+      - ../build/libs:/app   # берем jar после gradle build
+    command: ["java", "-jar", "registration-service-0.0.1-SNAPSHOT.jar"] # название jar поправь!
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/seller_db
       SPRING_DATASOURCE_USERNAME: dco_user
@@ -30,6 +35,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    ports:
+      - "8080:8080"
     networks:
       - dco-network
 
