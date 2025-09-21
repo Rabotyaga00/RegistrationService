@@ -6,7 +6,7 @@ spring:
     driver-class-name: org.postgresql.Driver
 
     hikari:
-      initialization-fail-timeout: 60000
+      initialization-fail-timeout: 10000
 
     logging:
       level:
@@ -15,10 +15,14 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+        boot:
+          allow_jdbc_metadata_access: false
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
   grpc:
