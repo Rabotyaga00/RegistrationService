@@ -5,6 +5,7 @@ import org.example.dto.SellerResponseDTO
 import org.example.dto.UpdateSellerRequest
 import org.example.domain.Seller
 import org.example.services.SellerService
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -14,11 +15,13 @@ class SellerController (
     private val sellerService : SellerService
 ){
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     fun createSeller(@RequestBody request: UpdateSellerRequest): SellerResponseDTO {
-        val saved = sellerService.registerSeller(request.userId, request.name)
+        val saved = sellerService.registerSeller(request.userId, request.shopName)
         return SellerResponseDTO(saved.userId,saved.shopName)
     }
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
     fun getSellerById(@PathVariable id: UUID): List<Seller> {
         return sellerService.listSellers(id)
     }
@@ -31,7 +34,7 @@ class SellerController (
         @PathVariable id: UUID,
         @RequestBody request: UpdateSellerRequest
     ): SellerDTO {
-        val saved = sellerService.sendSeller(request.userId, request.name)
+        val saved = sellerService.sendSeller(request.userId, request.shopName)
         return SellerDTO(
             id = saved.id,
             userId = saved.userId,

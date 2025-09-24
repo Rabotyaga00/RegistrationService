@@ -3,7 +3,7 @@ version: '3.8'
 services:
   postgres:
     image: postgres:17-alpine
-    container_name: dco-postgres
+    container_name: seller-postgres
     environment:
       POSTGRES_USER: dco_user
       POSTGRES_PASSWORD: dco_password

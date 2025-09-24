@@ -17,14 +17,17 @@ repositories {
 }
 
 dependencies {
-    implementation("io.netty:netty-all:4.1.100.Final")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
+//    implementation("io.netty:netty-all:4.1.100.Final")
+//    implementation("org.springframework.boot:spring-boot-starter-webflux")
+
 
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("net.devh:grpc-server-spring-boot-starter:2.15.0.RELEASE")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+
 
     // Protobuf
     implementation("com.google.protobuf:protobuf-java:3.25.3")
@@ -88,12 +91,12 @@ tasks.withType<JavaCompile> {
     targetCompatibility = "21"
 }
 
-sourceSets {
-    main {
-        java {
-            srcDir("build/generated/source/proto/main/java")
-            srcDir("build/generated/source/proto/main/kotlin")
-            srcDir("build/generated/source/proto/main/grpc")
-        }
-    }
-}
+//sourceSets {
+//    main {
+//        java {
+//            srcDir("build/generated/source/proto/main/java")
+//            srcDir("build/generated/source/proto/main/kotlin")
+//            srcDir("build/generated/source/proto/main/grpc")
+//        }
+//    }
+//}

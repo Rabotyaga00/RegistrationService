@@ -1,3 +1,5 @@
+package org.example.dto
+
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.util.*
 

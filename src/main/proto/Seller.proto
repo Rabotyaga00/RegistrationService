@@ -1,44 +1,44 @@
-syntax = "proto3";
-
-
-package seller;
-
-
-option java_multiple_files = true;
-option java_package = "org.example.proto";
-option java_outer_classname = "SellerProto";
-
-
-service SellerApi {
-  rpc CreateSeller (CreateSellerRequest) returns (CreateSellerResponse);
-  rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse);
-  rpc UpdateOrderStatus (UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
-}
-message CreateSellerRequest {
-  string user_id = 1;
-  string shop_name = 2;
-}
-message CreateSellerResponse {
-  string seller_id = 1;
-}
-
-
-message CreateOrderRequest {
-  string seller_id = 1;
-  string buyer_id = 2;
-  string total_price = 3;
-}
-message CreateOrderResponse {
-  string order_id = 1;
-}
-
-
-message UpdateOrderStatusRequest {
-  string seller_id = 1;
-  string order_id = 2;
-  string status = 3;
-}
-message UpdateOrderStatusResponse {
-  string order_id = 1;
-  string status = 2;
-}
+//syntax = "proto3";
+//
+//
+//package seller;
+//
+//
+//option java_multiple_files = true;
+//option java_package = "org.example.proto";
+//option java_outer_classname = "SellerProto";
+//
+//
+//service SellerApi {
+//  rpc CreateSeller (CreateSellerRequest) returns (CreateSellerResponse);
+//  rpc CreateOrder (CreateOrderRequest) returns (CreateOrderResponse);
+//  rpc UpdateOrderStatus (UpdateOrderStatusRequest) returns (UpdateOrderStatusResponse);
+//}
+//message CreateSellerRequest {
+//  string user_id = 1;
+//  string shop_name = 2;
+//}
+//message CreateSellerResponse {
+//  string seller_id = 1;
+//}
+//
+//
+//message CreateOrderRequest {
+//  string seller_id = 1;
+//  string buyer_id = 2;
+//  string total_price = 3;
+//}
+//message CreateOrderResponse {
+//  string order_id = 1;
+//}
+//
+//
+//message UpdateOrderStatusRequest {
+//  string seller_id = 1;
+//  string order_id = 2;
+//  string status = 3;
+//}
+//message UpdateOrderStatusResponse {
+//  string order_id = 1;
+//  string status = 2;
+//}

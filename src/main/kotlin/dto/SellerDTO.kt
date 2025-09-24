@@ -14,5 +14,5 @@ data class SellerResponseDTO(
 )
 data class UpdateSellerRequest(
     val userId: UUID,
-    val name: String
+    val shopName: String
 )
